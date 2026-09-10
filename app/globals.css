@@ -47,3 +47,14 @@
 @media(min-width:1700px){.header,.craft,.contact{padding-left:max(5%,calc((100vw - 1600px)/2));padding-right:max(5%,calc((100vw - 1600px)/2))}.moment-copy,.feeling-copy{left:max(5%,calc((100vw - 1600px)/2))}.moment h1{font-size:96px}.feeling h2{font-size:90px}}
 @media(max-width:650px){.camera-controls{bottom:97px;width:calc(100% - 48px);gap:8px}.camera-slider{min-width:0;flex:1;gap:9px;padding:17px 12px}.camera-slider label,.camera-slider>span{font-size:7px;letter-spacing:.06em}.camera-slider [data-slot=slider]{min-width:55px}.camera-icon{width:31px;height:31px}.camera-drag-hint{bottom:159px;font-size:8px;letter-spacing:.08em}.camera-canvas{inset:0 10% 0}.album-caption{left:24px;right:24px;bottom:34px;font-size:9px}.album-caption span:last-child{display:none}.moment-curtain{opacity:clamp(0,calc((var(--progress) - .78)*4.55),1)}.contact>p.contact-note{font-size:11px;max-width:260px}}
 @media(prefers-reduced-motion:reduce){.portal-art img,.album-art img{transform:none}}
+
+/* The camera is the full-bleed environment itself, not a moving image panel. */
+.feeling{height:230svh}
+.camera-stage.live-scene{inset:0;transform:none!important;will-change:auto;z-index:1}
+.live-scene .camera-canvas{inset:0;opacity:0;transition:opacity 1s ease}
+.live-scene.scene-ready .camera-canvas{opacity:1}
+.live-scene>img{position:absolute;inset:15% 0 0;height:85%;object-fit:contain}
+.feeling-copy{max-width:46%}
+.feeling-copy h2{text-shadow:0 3px 22px #20060e99}
+@media(max-width:650px){.feeling{height:215svh}.feeling-copy{max-width:calc(100% - 56px)}.live-scene .camera-canvas{inset:0}.camera-controls{bottom:88px}.camera-drag-hint{bottom:149px}}
+.calm .feeling{height:auto}
