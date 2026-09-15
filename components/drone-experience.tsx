@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { useMotion } from '@/components/motion-provider';
 
@@ -7,18 +7,31 @@ export default function DroneExperience() {
   const root = useRef<HTMLElement>(null);
   const video = useRef<HTMLVideoElement>(null);
   const { calm } = useMotion();
-  useEffect(() => {
+  useLayoutEffect(() => {
     const player = video.current; if (!player) return;
-    let visible = false;
+    const rect = player.getBoundingClientRect();
+    let visible = rect.bottom > 0 && rect.top < window.innerHeight;
     player.muted = true;
     player.defaultMuted = true;
+    player.playsInline = true;
+    player.controls = false;
+    player.setAttribute('muted', '');
+    player.setAttribute('playsinline', '');
+    player.setAttribute('webkit-playsinline', 'true');
+    player.src = '/videos/live-event.mp4';
+    player.load();
     const sync = () => {
-      if (visible && !document.hidden) void player.play().catch(() => {});
+      if (visible && !document.hidden) {
+        player.muted = true;
+        void player.play().catch(() => {});
+      }
       else player.pause();
     };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: .1 });
-    observer.observe(player); document.addEventListener('visibilitychange', sync); window.addEventListener('pageshow', sync); player.addEventListener('canplay', sync); player.addEventListener('loadeddata', sync);
-    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', sync); window.removeEventListener('pageshow', sync); player.removeEventListener('canplay', sync); player.removeEventListener('loadeddata', sync); player.pause(); };
+    const watchdog = window.setInterval(sync, 1200);
+    observer.observe(player); document.addEventListener('visibilitychange', sync); window.addEventListener('pageshow', sync); window.addEventListener('focus', sync); window.addEventListener('scroll', sync, { passive: true }); player.addEventListener('canplay', sync); player.addEventListener('loadeddata', sync);
+    sync();
+    return () => { window.clearInterval(watchdog); observer.disconnect(); document.removeEventListener('visibilitychange', sync); window.removeEventListener('pageshow', sync); window.removeEventListener('focus', sync); window.removeEventListener('scroll', sync); player.removeEventListener('canplay', sync); player.removeEventListener('loadeddata', sync); player.pause(); };
   }, []);
   useEffect(() => {
     const el = root.current; if (!el) return;
@@ -42,7 +55,7 @@ export default function DroneExperience() {
   }, [calm]);
   return <section ref={root} id="feeling" className="drone-chapter" aria-labelledby="drone-title">
     <div className="drone-pin">
-      <div className="drone-image"><video ref={video} src="/videos/live-event.mp4" autoPlay muted loop playsInline preload="auto" aria-label="Live event film"/></div>
+      <div className="drone-image"><video ref={video} autoPlay muted loop playsInline preload="auto" aria-label="Live event film"/></div>
       <div className="drone-shade" aria-hidden="true"/>
       <div className="drone-topline"><span className="eyebrow">A DIFFERENT PERSPECTIVE</span></div>
       <div className="drone-copy"><h2 id="drone-title">Live the moment.<br/><em>Feel everything.</em></h2><p>Your people. Your celebration.</p><a className="text-link light" href="/services#frame">Photography, film & aerial stories <ArrowUpRight size={17}/></a></div>
