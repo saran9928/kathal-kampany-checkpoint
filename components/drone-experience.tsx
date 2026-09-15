@@ -9,21 +9,17 @@ export default function DroneExperience() {
   const { calm } = useMotion();
   useEffect(() => {
     const player = video.current; if (!player) return;
-    const controller = new AbortController(); let objectUrl = '';
-    // A blob also supports WebKit previews whose local server lacks byte ranges.
-    fetch('/videos/live-event.mp4', { signal: controller.signal }).then(response => { if (!response.ok) throw new Error('Video unavailable'); return response.blob(); }).then(blob => {
-      objectUrl = URL.createObjectURL(blob); player.src = objectUrl; player.load();
-    }).catch(() => {});
-    return () => { controller.abort(); if (objectUrl) URL.revokeObjectURL(objectUrl); };
-  }, []);
-  useEffect(() => {
-    const player = video.current; if (!player) return;
     let visible = false;
-    const sync = () => { if (visible && !document.hidden && !calm) { if (player.readyState >= 2) player.play().catch(() => {}); } else player.pause(); };
+    player.muted = true;
+    player.defaultMuted = true;
+    const sync = () => {
+      if (visible && !document.hidden) void player.play().catch(() => {});
+      else player.pause();
+    };
     const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }, { threshold: .1 });
-    observer.observe(player); document.addEventListener('visibilitychange', sync); player.addEventListener('canplay', sync);
-    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', sync); player.removeEventListener('canplay', sync); player.pause(); };
-  }, [calm]);
+    observer.observe(player); document.addEventListener('visibilitychange', sync); window.addEventListener('pageshow', sync); player.addEventListener('canplay', sync); player.addEventListener('loadeddata', sync);
+    return () => { observer.disconnect(); document.removeEventListener('visibilitychange', sync); window.removeEventListener('pageshow', sync); player.removeEventListener('canplay', sync); player.removeEventListener('loadeddata', sync); player.pause(); };
+  }, []);
   useEffect(() => {
     const el = root.current; if (!el) return;
     let frame = 0, current = 0, target = 0;
@@ -46,7 +42,7 @@ export default function DroneExperience() {
   }, [calm]);
   return <section ref={root} id="feeling" className="drone-chapter" aria-labelledby="drone-title">
     <div className="drone-pin">
-      <div className="drone-image"><video ref={video} muted loop playsInline preload="auto" aria-label="Live event film"/></div>
+      <div className="drone-image"><video ref={video} src="/videos/live-event.mp4" autoPlay muted loop playsInline preload="auto" aria-label="Live event film"/></div>
       <div className="drone-shade" aria-hidden="true"/>
       <div className="drone-topline"><span className="eyebrow">A DIFFERENT PERSPECTIVE</span></div>
       <div className="drone-copy"><h2 id="drone-title">Live the moment.<br/><em>Feel everything.</em></h2><p>Your people. Your celebration.</p><a className="text-link light" href="/services#frame">Photography, film & aerial stories <ArrowUpRight size={17}/></a></div>
