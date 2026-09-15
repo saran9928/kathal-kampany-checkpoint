@@ -63,3 +63,8 @@ html[data-motion=quiet] .automatic-album-leaf{display:none}
  .services-visual .text-link{flex:none}
  .contact-chapter{scroll-margin-top:0}
 }
+.ambient-film{position:relative;width:100%;height:100%;overflow:hidden}
+.ambient-film>video,.ambient-film>.ambient-film-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ambient-film>video{opacity:0}
+.ambient-film[data-playing=true]>video{opacity:1}
+.ambient-film-fallback{filter:saturate(.88) contrast(1.03)}
