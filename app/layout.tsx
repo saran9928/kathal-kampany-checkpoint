@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { MotionProvider } from '@/components/motion-provider';
 
 export const metadata: Metadata = {
   title: 'The Kathal Kampany — Relive your day forever',
@@ -15,7 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );
