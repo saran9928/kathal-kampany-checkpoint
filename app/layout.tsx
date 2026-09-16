@@ -3,8 +3,8 @@ import './globals.css';
 import { MotionProvider } from '@/components/motion-provider';
 
 export const metadata: Metadata = {
-  title: 'The Kathal Kampany — Relive your day forever',
-  description: 'Weddings, corporate events, photography and cinematic films. A journey from the moment to the memory, with The Kathal Kampany.',
+  title: 'The Kaathal Kampany — Relive your day forever',
+  description: 'Weddings, corporate events, photography and cinematic films. A journey from the moment to the memory, with The Kaathal Kampany.',
   icons: { icon: '/images/logo.png' },
 };
 

@@ -7,7 +7,7 @@ import ServicesFilm from '@/components/services-film';
 import Reveal from '@/components/reveal';
 import { services, WHATSAPP_URL, DISPLAY_PHONE } from '@/lib/brand';
 
-export const metadata: Metadata = { title: 'Services & Contact — The Kathal Kampany', description: 'Event management, photography, 360° and drone videography, cinematic films and albums. Tell The Kathal Kampany about your next occasion.' };
+export const metadata: Metadata = { title: 'Services & Contact — The Kaathal Kampany', description: 'Event management, photography, 360° and drone videography, cinematic films and albums. Tell The Kaathal Kampany about your next occasion.' };
 export default function ServicesPage() {
   return <><SiteHeader active="services"/><main className="services-page"><a className="skip-link" href="#contact">Skip to contact</a>
 <section className="services-chapter" aria-labelledby="services-title"><div className="services-intro"><Reveal><p className="eyebrow">01 / OUR CRAFT</p><h1 id="services-title">One Kampany.<br/><em>Every possibility.</em></h1><p className="services-lede">We create the occasion, capture its feeling,<br className="desktop-break"/> and turn it into something you can keep.</p></Reveal><div className="service-rows">{services.map((service, index) => <Reveal key={service.id}><article id={service.id} className="service-row"><span className="service-index">0{index + 1}</span><div><h2>{service.name}</h2><ul>{service.items.map(item => <li key={item}>{item}</li>)}</ul></div></article></Reveal>)}</div></div>

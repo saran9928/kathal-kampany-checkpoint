@@ -130,7 +130,7 @@ export default function CameraExperience({ calm }: { calm: boolean }) {
         const mark=new T.Mesh(new T.PlaneGeometry(width,height),new T.MeshBasicMaterial({map:texture,transparent:true,depthWrite:false}));
         mark.position.set(-.71,.47,-.286);root.add(mark);return texture;
       };
-      const brandTexture=makeMark('KATHAL',.49,.123);
+      const brandTexture=makeMark('KAATHAL',.49,.123);
 
       const pieces: Group[] = [];
       for (let i=0; i<7; i++) {
