@@ -68,3 +68,68 @@ html[data-motion=quiet] .automatic-album-leaf{display:none}
 .ambient-film>video{opacity:0}
 .ambient-film[data-playing=true]>video{opacity:1}
 .ambient-film-fallback{filter:saturate(.88) contrast(1.03)}
+
+/* Phone layouts: retain the cinematic artwork at a readable, touch-friendly scale. */
+@media(max-width:700px){
+ html{overflow-x:clip;scroll-padding-top:calc(var(--header-height) + 12px)}
+ body{overflow-x:clip}
+ :root{--header-height:106px}
+ .site-header{grid-template-rows:62px 43px;padding-inline:18px;gap:0 12px}
+ .brand{gap:8px}.brand>span{font-size:9px}.brand b{font-size:13px}
+ .brand .brand-mark{width:42px;height:37px}
+ .header-talk{min-height:44px;font-size:12px;gap:6px}
+ .main-nav{justify-content:space-evenly;gap:12px}.main-nav>a{min-height:44px;font-size:13px}
+ .moment{height:calc(100svh - var(--header-height));min-height:620px;max-height:850px}
+ .moment-copy{top:26px;left:20px;right:20px}
+ .moment-copy .eyebrow{font-size:10px;margin-bottom:14px;letter-spacing:.16em}
+ .moment h1{font-size:clamp(36px,10.5vw,64px);line-height:1.04}
+ .moment-copy>p:not(.eyebrow){font-size:14px;line-height:1.5;margin-top:15px;max-width:310px}
+ .moment-copy .button{margin-top:17px;min-height:46px;padding:12px 17px;font-size:13px}
+ .portal-art{inset:32% -21% -2% -48%}
+ .moment-wash{background:linear-gradient(180deg,#fcf6ec 0%,#fcf6ec 29%,#fcf6ecb8 38%,transparent 53%)}
+ .scroll-note{left:20px;bottom:18px;font-size:9px;background:#fcf6ecce;padding:8px 10px;border-radius:2px}
+ .drone-chapter{height:auto}
+ .drone-pin{position:relative;top:auto;height:calc(100svh - var(--header-height));min-height:540px;max-height:780px}
+ .drone-image{inset:0}.drone-topline{left:20px;right:20px;top:24px}
+ .drone-topline .eyebrow{font-size:10px}
+ .drone-copy{left:20px;right:20px;bottom:90px;transform:none}
+ .drone-copy h2{font-size:clamp(36px,10.5vw,62px)}
+ .drone-copy>p{font-size:14px;margin-top:16px}
+ .drone-copy .text-link{font-size:12px;gap:10px}
+ .drone-bottom{left:20px;right:20px;bottom:25px}.drone-cue{font-size:9px}
+ .memory{padding:0 20px 38px}
+ .album-art{width:140%;height:auto;aspect-ratio:3/2;margin:0 0 -9% 12%;flex:none}
+ .memory-copy .eyebrow{font-size:10px;margin-bottom:15px}
+ .memory h2{font-size:clamp(36px,10vw,58px)}
+ .memory-copy>p:not(.eyebrow){font-size:14px;margin-top:16px;line-height:1.65}
+ .memory .button{margin-top:20px;font-size:13px}
+ .craft-links{margin-inline:20px;padding-bottom:18px}.craft-links>a{font-size:14px;padding:17px 0}
+ .craft-links .eyebrow{font-size:10px;margin-right:8px}
+ .services-chapter{padding:28px 20px 36px;gap:24px}
+ .services-intro>.eyebrow{font-size:10px}
+ .services-intro h1{font-size:clamp(35px,9.6vw,58px);margin-top:14px}
+ .services-lede{font-size:14px;line-height:1.6;margin-top:16px}
+ .service-rows{margin-top:26px}
+ .service-row{grid-template-columns:20px minmax(0,1fr);gap:10px;padding:18px 0}
+ .service-row h2{font-size:clamp(19px,5.4vw,26px);margin:0 0 8px;line-height:1.25}
+ .service-index{font-size:10px}
+ .service-row ul{display:flex;gap:4px 12px;margin-top:8px}.service-row li{font-size:13px;line-height:1.6}
+ .services-photo{position:relative;aspect-ratio:4/3;width:100%}
+ .services-film>.ambient-film{position:absolute;inset:0}
+ .services-image-caption{font-size:9px;gap:12px}
+ .services-visual .text-link{min-height:44px;font-size:13px}
+ .contact-chapter{padding:38px 20px 44px;gap:32px}
+ .contact-copy h2{font-size:clamp(40px,12vw,62px)}
+ .contact-copy .eyebrow{font-size:10px;margin-bottom:18px}
+ .contact-copy .reveal>p:not(.eyebrow){font-size:14px;margin-top:18px}
+ .contact-phone{font-size:22px;margin-top:24px}.contact-channel{font-size:10px}
+ .contact-form{gap:23px}.contact-form [data-slot=input],.contact-form [data-slot=textarea],.contact-form [data-slot=native-select]{font-size:16px;min-width:0}
+ .site-footer{padding:26px 20px calc(26px + env(safe-area-inset-bottom));gap:17px}
+ .footer-signature>span{font-size:11px}.footer-links{flex-direction:row;flex-wrap:wrap;gap:8px 22px}
+ .footer-links>a{display:inline-flex;align-items:center;min-height:44px}
+}
+@media(max-width:360px){
+ .site-header{padding-inline:14px}.brand>span{font-size:8px}.brand b{font-size:11px}.brand .brand-mark{width:36px;height:32px}
+ .moment-copy{left:16px;right:16px}.moment h1{font-size:34px}.moment-copy>p:not(.eyebrow){font-size:13px}
+ .services-intro h1{font-size:33px}.service-row h2{font-size:18px}
+}
